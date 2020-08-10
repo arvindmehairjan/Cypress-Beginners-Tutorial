@@ -11,9 +11,20 @@ it('should create a new account for the ecommerce website', () => {
     cy.get('#signInModalLabel').contains('Sign up')
 
     cy.wait(2000)
+    // Function that generate a new username with each new test
+    function generateNewUsername() {
+        let text = "";
+        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+        for(let i = 0; i < 10; i++) 
+        text += alphabet.charAt(Math.floor(Math.random() * alphabet.length))
+        return text;
+    }
+
+    const generatedUsername = generateNewUsername()
     // Write the username and the password
-    cy.get('#sign-username').type('iamarandomuser123456')
-    cy.get('#sign-password').type('iuwqhdiqwqw')
+    cy.get('#sign-username').type(generatedUsername)
+    cy.get('#sign-password').type('randompassword')
 
     // Click on the Sign up button
     cy.get('button').contains('Sign up').click()
